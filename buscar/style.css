@@ -1,0 +1,74 @@
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+}
+
+h2 {
+  font-size: 24px;
+  margin: 0 0 10px;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+}
+
+button {
+  padding: 8px 16px;
+  font-size: 16px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.result-container {
+  margin-top: 20px;
+  border-top: 1px solid #ddd;
+  padding-top: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.pagination {
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.pagination li {
+  display: inline;
+}
+
+.pagination li a {
+  padding: 16px px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.pagination li a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.pagination li a:hover:not(.active) {
+  background-color: #ddd;
+}
+
+

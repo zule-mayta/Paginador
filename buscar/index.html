@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Búsqueda de Empleados</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* Estilos generales */
+    .container {
+      border: 1px solid #ccc;
+      padding: 20px;
+    }
+    
+    .container h2 {
+      margin-top: 0;
+      text-align: center; /* Centrar el texto */
+    }
+
+    /* Estilos para pantallas pequeñas */
+    @media screen and (max-width: 767px) {
+      .horizontal-container {
+        flex-direction: column;
+      }
+      .search-section {
+        margin-bottom: 20px;
+      }
+      .search-section .search-container {
+        display: flex;
+        flex-direction: column;
+      }
+      .search-section .search-container input,
+      .search-section .search-container button {
+        margin-bottom: 10px;
+      }
+    }
+
+    /* Estilos para pantallas medianas y grandes */
+    @media screen and (min-width: 768px) {
+      .horizontal-container {
+        display: flex;
+        justify-content: space-between;
+      }
+      .search-section {
+        width: 48%;
+      }
+      .search-section .search-container {
+        display: flex;
+        align-items: center;
+      }
+      .search-section .search-container input {
+        margin-right: 10px;
+      }
+    }
+
+
+  </style>
+
+<script>
+  $(document).ready(function() {
+    var currentPage = 1; // Página actual
+    
+    // Función para realizar la consulta a la base de datos
+    function fetchData(searchTerm, page) {
+      $.ajax({
+        url: 'search.php',
+        type: 'POST',
+        data: {
+          search: searchTerm,
+          page: page
+        },
+        success: function(response) {
+          $('#result').html(response);
+        }
+      });
+    }
+    
+    // Evento "onkey" para realizar la consulta al escribir en el campo de búsqueda
+    $('#search').on('keyup', function() {
+      var searchTerm = $(this).val();
+      currentPage = 1; // Reiniciar a la primera página al buscar nuevamente
+      fetchData(searchTerm, currentPage);
+    });
+    
+    // Función para cambiar de página
+    $(document).on('click', '.pagination li a', function(e) {
+      e.preventDefault();
+      var page = $(this).data('page');
+      var searchTerm = $('#search').val();
+      currentPage = page;
+      fetchData(searchTerm, currentPage);
+    });
+    
+    // Evento "click" para realizar la consulta al hacer clic en el botón "Buscar"
+    $('#searchBtn').click(function() {
+      var searchTerm = $('#search').val();
+      currentPage = 1; // Reiniciar a la primera página al buscar nuevamente
+      fetchData(searchTerm, currentPage);
+    });
+
+    // Evento "click" para realizar la consulta al hacer clic en el botón "Buscar2"
+    $('#searchBtn2').click(function() {
+      var searchTerm = $('#search2').val();
+      currentPage = 1; // Reiniciar a la primera página al buscar nuevamente
+      fetchData(searchTerm, currentPage);
+    });
+  });
+</script>
+
+</head>
+<body>
+  <div class="container">
+    <h2>METODOS DE BUSQUEDA</h2>
+    <div class="horizontal-container">
+      <div class="search-section">
+        <h2>ONKEY</h2>
+        <div class="search-container">
+          <input type="text" id="search" placeholder="Buscar">
+        </div>
+        <div class="result-container">
+          <div id="result"></div>
+        </div>
+      </div>
+      <div class="search-section">
+        <h2>BUSCAR UN DATO</h2>
+        <div class="search-container">
+          <input type="text" id="search2" placeholder="Buscar">
+          <button id="searchBtn2">Buscar</button>
+        </div>
+      <div class="result-container">
+          <div id="result2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
